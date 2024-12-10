@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 
 let User;
 
-// Schema Definition
 const userSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   password: String,
@@ -11,7 +10,6 @@ const userSchema = new mongoose.Schema({
   loginHistory: [{ dateTime: Date, userAgent: String }]
 });
 
-// Initialize MongoDB
 module.exports.initialize = function () {
   return new Promise((resolve, reject) => {
     const db = mongoose.createConnection(
@@ -29,7 +27,6 @@ module.exports.initialize = function () {
   });
 };
 
-// Register a new user
 module.exports.registerUser = function (userData) {
   return new Promise((resolve, reject) => {
     if (userData.password !== userData.password2) {
@@ -52,7 +49,6 @@ module.exports.registerUser = function (userData) {
   });
 };
 
-// Authenticate a user
 module.exports.checkUser = function (userData) {
   return new Promise((resolve, reject) => {
     User.find({ userName: userData.userName })

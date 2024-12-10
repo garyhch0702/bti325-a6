@@ -69,17 +69,14 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname,  'views'));
 
 
-// Track active route
 app.use((req, res, next) => {
     let route = req.baseUrl + req.path;
     app.locals.activeRoute = route == "/" ? "/" : route.replace(/\/$/, "");
     next();
 });
 
-// Static Assets
 app.use(express.static('public'));
 
-// Routes
 app.get('/', (req, res) => {
     res.redirect('/blog');
 });
@@ -114,7 +111,6 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-// Authentication Routes
 app.get('/register', (req, res) => {
     res.render('register');
 });
@@ -155,7 +151,6 @@ app.get('/userHistory', ensureLogin, (req, res) => {
     res.render('userHistory', { user: req.session.user });
 });
 
-// Posts Routes
 app.get('/posts', ensureLogin, (req, res) => {
     blogData.getPosts()
         .then((posts) => res.render('posts', { posts }))
@@ -180,7 +175,6 @@ app.post('/posts/delete/:id', ensureLogin, (req, res) => {
         .catch((err) => res.status(500).send("Unable to delete post."));
 });
 
-// Categories Routes
 app.get('/categories', ensureLogin, (req, res) => {
     blogData.getCategories()
         .then((categories) => res.render('categories', { categories }))
@@ -203,7 +197,6 @@ app.post('/categories/delete/:id', ensureLogin, (req, res) => {
         .catch((err) => res.status(500).send("Unable to delete category."));
 });
 
-// Initialize Services and Start Server
 blogData.initialize()
     .then(authData.initialize)
     .then(() => {

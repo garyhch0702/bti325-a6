@@ -1,12 +1,10 @@
 let posts = [];
 let categories = [];
 
-// Function to initialize data
 module.exports.initialize = function () {
     return new Promise((resolve, reject) => {
         try {
-            // Simulated initialization (can use database logic here if needed)
-            posts = [
+             posts = [
                 { id: 1, title: "First Post", postDate: "2024-11-29", category: "Tech", published: true },
                 { id: 2, title: "Second Post", postDate: "2024-12-01", category: "General", published: false },
             ];
@@ -21,7 +19,6 @@ module.exports.initialize = function () {
     });
 };
 
-// Function to get all posts
 module.exports.getPosts = function () {
     return new Promise((resolve, reject) => {
         if (posts.length > 0) resolve(posts);
@@ -29,7 +26,6 @@ module.exports.getPosts = function () {
     });
 };
 
-// Function to get all categories
 module.exports.getCategories = function () {
     return new Promise((resolve, reject) => {
         if (categories.length > 0) resolve(categories);
@@ -37,11 +33,10 @@ module.exports.getCategories = function () {
     });
 };
 
-// Function to add a new post
 module.exports.addPost = function (post) {
     return new Promise((resolve, reject) => {
         try {
-            post.id = posts.length + 1; // Auto-increment ID
+            post.id = posts.length + 1; 
             posts.push(post);
             resolve();
         } catch (err) {
@@ -50,7 +45,6 @@ module.exports.addPost = function (post) {
     });
 };
 
-// Function to delete a post by ID
 module.exports.deletePost = function (id) {
     return new Promise((resolve, reject) => {
         const index = posts.findIndex((post) => post.id == id);
@@ -63,7 +57,6 @@ module.exports.deletePost = function (id) {
     });
 };
 
-// Function to add a new category
 module.exports.addCategory = function (category) {
     return new Promise((resolve, reject) => {
         try {
@@ -76,7 +69,6 @@ module.exports.addCategory = function (category) {
     });
 };
 
-// Function to delete a category by ID
 module.exports.deleteCategory = function (id) {
     return new Promise((resolve, reject) => {
         const index = categories.findIndex((category) => category.id == id);
