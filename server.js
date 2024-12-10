@@ -21,13 +21,12 @@ const authData = require('../auth-service');
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080;
 
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(clientSessions({
     cookieName: "session",
     secret: "BTI325_A6_secret_key",
-    duration: 2 * 60 * 1000, // 2 minutes
-    activeDuration: 1000 * 60 // Extend session by 1 minute if active
+    duration: 2 * 60 * 1000, 
+    activeDuration: 1000 * 60 
 }));
 
 app.use((req, res, next) => {
@@ -35,7 +34,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Helper Middleware
 function ensureLogin(req, res, next) {
     if (!req.session.user) {
         res.redirect('/login');
@@ -47,6 +45,7 @@ function ensureLogin(req, res, next) {
 // Handlebars Setup
 app.engine('.hbs', exphbs.engine({
     extname: '.hbs',
+    defaultLayout: 'main',
     helpers: {
         navLink: function (url, options) {
             return (
@@ -67,7 +66,7 @@ app.engine('.hbs', exphbs.engine({
     }
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, '..', 'views'));
+app.set('views', path.join(__dirname,  'views'));
 
 
 // Track active route
