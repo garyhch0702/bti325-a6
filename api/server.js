@@ -15,8 +15,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const clientSessions = require('client-sessions');
 const exphbs = require('express-handlebars');
-const blogData = require('./blog-service');
-const authData = require('./auth-service');
+const blogData = require('../blog-service');
+const authData = require('../auth-service');
 
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080;
@@ -67,7 +67,8 @@ app.engine('.hbs', exphbs.engine({
     }
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '..', 'views'));
+
 
 // Track active route
 app.use((req, res, next) => {
