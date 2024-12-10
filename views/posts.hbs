@@ -1,0 +1,34 @@
+<h2>Posts</h2>
+<a href="/posts/add" class="btn btn-success mb-3">Add Post</a>
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Post ID</th>
+            <th>Title</th>
+            <th>Post Date</th>
+            <th>Category</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posts}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>{{postDate}}</td>
+            <td>{{category}}</td>
+            <td>{{published}}</td>
+            <td>
+                <form action="/posts/delete/{{id}}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="6">No posts available.</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
